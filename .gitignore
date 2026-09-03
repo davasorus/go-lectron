@@ -39,3 +39,15 @@ dist/
 npm-debug.log*
 .npm/
 .vite/
+TO-DO/build/android/.gradle/buildOutputCleanup/cache.properties
+TO-DO/build/android/build/reports/problems/problems-report.html
+.gitignore
+TO-DO/build/android/.gradle/vcs-1/gc.properties
+TO-DO/build/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+TO-DO/build/android/.gradle/9.2.1/fileHashes/fileHashes.lock
+TO-DO/build/android/.gradle/9.2.1/fileHashes/fileHashes.bin
+TO-DO/build/android/.gradle/9.2.1/fileChanges/last-build.bin
+TO-DO/build/android/.gradle/9.2.1/checksums/sha1-checksums.bin
+TO-DO/build/android/.gradle/9.2.1/checksums/md5-checksums.bin
+TO-DO/build/android/.gradle/9.2.1/checksums/checksums.lock
+TO-DO/build/android/.gradle/9.2.1/gc.properties
