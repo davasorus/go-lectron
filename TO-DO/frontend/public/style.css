@@ -185,3 +185,44 @@ h1 {
     margin: 12px 0;
     font-size: 0.9rem;
 }
+
+.filters {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin: 12px 0;
+    padding: 4px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+}
+
+.filter-btn {
+    flex: 1;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.filter-btn:hover {
+    color: #333;
+}
+
+.filter-btn.is-active {
+    background: #fff;
+    color: #5b5ee1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.edit-input {
+    flex: 1;
+    padding: 4px 8px;
+    border: 1px solid #5b5ee1;
+    border-radius: 6px;
+    font: inherit;
+}

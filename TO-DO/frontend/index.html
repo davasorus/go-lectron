@@ -20,6 +20,11 @@
             </div>
             <div id="todo-list"></div>
             <div id="stats"></div>
+            <div class="filters">
+    <button class="filter-btn is-active" data-filter="all" onclick="setFilter('all')">All</button>
+    <button class="filter-btn" data-filter="active" onclick="setFilter('active')">Active</button>
+    <button class="filter-btn" data-filter="completed" onclick="setFilter('completed')">Completed</button>
+</div>
             <button class="btn" onclick="clearCompleted()">Clear Completed</button>
         </div>
     </div>

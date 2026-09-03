@@ -25,10 +25,18 @@ export function GetAll(): $CancellablePromise<$models.Todo[] | null> {
     return $Call.ByID(851959634);
 }
 
+export function GetFiltered(filter: string): $CancellablePromise<$models.Todo[] | null> {
+    return $Call.ByID(702393000, filter);
+}
+
 export function GetStats(): $CancellablePromise<$models.TodoStats> {
     return $Call.ByID(2561327386);
 }
 
 export function Toggle(id: number): $CancellablePromise<void> {
     return $Call.ByID(607591045, id);
+}
+
+export function Update(id: number, title: string): $CancellablePromise<void> {
+    return $Call.ByID(203246836, id, title);
 }
