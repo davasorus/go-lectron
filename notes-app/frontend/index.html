@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>Notes</h1>
+                <button id="new-note-btn" class="btn-primary">+ New Note</button>
+            </div>
+            <div id="notes-list" class="notes-list"></div>
+            <div class="sidebar-footer">
+                <button id="save-btn" class="btn-secondary">Save</button>
+                <button id="load-btn" class="btn-secondary">Load</button>
+            </div>
+        </div>
+
+        <!-- Editor -->
+        <div class="editor">
+            <div id="empty-state" class="empty-state">
+                <h2>No note selected</h2>
+                <p>Select a note from the list or create a new one</p>
+            </div>
+            <div id="note-editor" class="note-editor" style="display: none;">
+                <input type="text" id="note-title" placeholder="Note title" class="title-input">
+                <textarea id="note-content" placeholder="Start typing..." class="content-input"></textarea>
+                <div class="editor-footer">
+                    <button id="delete-btn" class="btn-danger">Delete</button>
+                    <span id="last-updated" class="last-updated"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/wails/runtime.js"></script>
+    <script type="module" src="./src/main.js"></script>
+</body>
+</html>
