@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<style>
+    :root { font-family: "Segoe UI", system-ui, sans-serif; }
+    body {
+        margin: 0; padding: 24px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #1d1d1f;
+        display: flex; align-items: center; justify-content: center;
+        min-height: calc(100vh - 48px);
+    }
+    .card {
+        background: rgba(255,255,255,.95); border-radius: 16px;
+        padding: 28px; width: 100%; max-width: 420px;
+        box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    }
+    h1 { font-size: 1.2rem; margin: 0 0 6px; }
+    #version { color: #666; font-size: .85rem; margin: 0 0 14px; }
+    #notes {
+        background: #f0f0f3; border-radius: 10px; padding: 12px;
+        font-size: .8rem; max-height: 160px; overflow-y: auto;
+        white-space: pre-wrap; margin: 0 0 14px; display: none;
+    }
+    #bar-track {
+        background: #e0e0e0; border-radius: 6px; height: 8px;
+        margin: 0 0 14px; display: none;
+    }
+    #bar { background: #667eea; border-radius: 6px; height: 8px; width: 0%; }
+    .row { display: flex; gap: 8px; }
+    button {
+        border: none; border-radius: 9px; padding: 10px 16px;
+        font-weight: 600; cursor: pointer; display: none;
+    }
+    .primary { background: #667eea; color: #fff; flex: 1; }
+    .ghost   { background: transparent; color: #666; }
+    #error { color: #ff3b30; font-size: .85rem; display: none; margin: 0 0 14px; }
+</style>
+</head>
+<body>
+<div class="card">
+    <h1 id="title">Checking for updates…</h1>
+    <p id="version"></p>
+    <p id="error"></p>
+    <pre id="notes"></pre>
+    <div id="bar-track"><div id="bar"></div></div>
+    <div class="row">
+        <button id="install" class="primary">Install</button>
+        <button id="restart" class="primary">Restart &amp; Apply</button>
+        <button id="close"   class="primary">Close</button>
+        <button id="skip"    class="ghost">Skip This Version</button>
+        <button id="remind"  class="ghost">Remind Me Later</button>
+    </div>
+</div>
+<script>
+    const { On, Emit } = window.wails.Events;
+    const $ = (id) => document.getElementById(id);
+    const buttons = ["install", "restart", "close", "skip", "remind"];
+
+    function show(title, visible) {
+        $("title").textContent = title;
+        buttons.forEach(b => $(b).style.display = visible.includes(b) ? "block" : "none");
+    }
+
+    On("wails:updater:check-started", () => {
+        $("error").style.display = "none";
+        show("Checking for updates…", []);
+    });
+
+    On("wails:updater:update-available", (e) => {
+        const rel = e.data ?? e;
+        $("version").textContent = "New version: " + rel.version;
+        if (rel.notes) { $("notes").textContent = rel.notes; $("notes").style.display = "block"; }
+        show("Update Available", ["install", "skip", "remind"]);
+    });
+
+    On("wails:updater:no-update", () => {
+        $("version").textContent = "";
+        show("You're up to date ✓", ["close"]);
+    });
+
+    On("wails:updater:download-started", () => {
+        $("bar-track").style.display = "block";
+        show("Downloading…", []);
+    });
+
+    On("wails:updater:download-progress", (e) => {
+        const p = e.data ?? e;
+        if (p.total > 0) $("bar").style.width = Math.round(100 * p.written / p.total) + "%";
+    });
+
+    On("wails:updater:verifying",  () => show("Verifying…", []));
+    On("wails:updater:installing", () => show("Installing…", []));
+
+    On("wails:updater:update-ready", () => {
+        $("bar-track").style.display = "none";
+        show("Update Ready", ["restart"]);
+    });
+
+    On("wails:updater:error", (e) => {
+        const info = e.data ?? e;
+        $("error").textContent = (info.stage ? info.stage + ": " : "") + info.message;
+        $("error").style.display = "block";
+        show("Update Failed", ["close"]);
+    });
+
+    $("install").addEventListener("click", () => Emit("wails:updater:user:install"));
+    $("restart").addEventListener("click", () => Emit("wails:updater:user:restart"));
+    $("skip").addEventListener("click",    () => Emit("wails:updater:user:skip"));
+    $("remind").addEventListener("click",  () => Emit("wails:updater:user:remind"));
+    $("close").addEventListener("click",   () => Emit("wails:updater:user:cancel"));
+
+    // Ask the host to replay the current state so the window paints correctly on (re)open.
+    Emit("wails:updater:window:ready");
+</script>
+</body>
+</html>
