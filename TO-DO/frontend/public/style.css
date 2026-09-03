@@ -1,0 +1,187 @@
+:root {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+    font-size: 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: rgba(255, 255, 255, 0.87);
+}
+
+body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 2.5em;
+    font-weight: 300;
+    margin: 0 0 30px 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.input-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.input {
+    flex: 1;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    height: 50px;
+    padding: 0 20px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.input:focus {
+    border-color: #667eea;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.btn {
+    height: 50px;
+    padding: 0 30px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+#todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.todo {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    background: white;
+    border: 2px solid #f0f0f0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    gap: 15px;
+}
+
+.todo:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    transform: translateX(4px);
+}
+
+.todo.completed {
+    opacity: 0.6;
+}
+
+.todo.completed span {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.todo input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid #667eea;
+    border-radius: 6px;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.todo input[type="checkbox"]:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.todo input[type="checkbox"]:checked {
+    background: #667eea;
+    border-color: #667eea;
+}
+
+.todo input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.todo span {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+.todo button {
+    padding: 8px 16px;
+    background: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    flex-shrink: 0;
+}
+
+.todo:hover button {
+    opacity: 1;
+}
+
+.todo button:hover {
+    background: #ee5a6f;
+    transform: scale(1.05);
+}
+
+#todo-list:empty::before {
+    content: "No todos yet. Add one above!";
+    display: block;
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+}
+
+#stats {
+    color: #666;
+    margin: 12px 0;
+    font-size: 0.9rem;
+}

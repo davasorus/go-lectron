@@ -31,3 +31,11 @@ go.work.sum
 # .idea/
 # .vscode/
 
+
+# JS/TS
+node_modules/
+dist/
+*.tsbuildinfo
+npm-debug.log*
+.npm/
+.vite/

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #qrcode {
+            margin-bottom: 20px;
+            width: 256px;
+            height: 256px;
+        }
+        #controls {
+            display: flex;
+            gap: 10px;
+        }
+        #text {
+            padding: 5px;
+        }
+        #generateButton {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<img id="qrcode" alt="QR code"/>
+<div id="controls">
+    <input type="text" id="text" placeholder="Enter text">
+    <button id="generateButton">Generate QR Code</button>
+</div>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
