@@ -1,0 +1,11 @@
+# Normalize line endings to LF across the repo, including Windows-specific
+# scripts and build artifacts that keep flipping to CRLF locally.
+* text=auto eol=lf
+
+*.go text eol=lf
+go.mod text eol=lf
+go.sum text eol=lf
+*.bat text eol=lf
+*.gitignore text eol=lf
+*.properties text eol=lf
+*.html text eol=lf
